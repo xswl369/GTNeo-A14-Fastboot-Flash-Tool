@@ -121,14 +121,14 @@ LLD 11.0.1 (/buildbot/tmp/tmp6_m7QH b397f81060ce6d701042b782172ed13bee898b79))
 
 GitHub 单文件硬上限 100 MB，Release 附件上限 2 GB，以下两个文件因此**不在仓库内**：
 
-| 文件 | 大小 | SHA256 |
-|---|---|---|
-| `IMG/super.img` | 9,728 MB (9.5 GB) | 见 `CHECKSUMS.sha256` |
-| `IMG/recovery.img` | 128 MB | 见 `CHECKSUMS.sha256` |
+| 文件 | 大小 | SHA256 | 获取方式 |
+|---|---|---|---|
+| `IMG/recovery.img` | 128 MB (134,217,728 B) | `777194211e8d7128230938e929cb1217d3863c09999efa1aa66060f71ef57a7f` | ✅ [Release v1.0 附件](../../releases/tag/v1.0) |
+| `IMG/super.img` | 9,728 MB (9.5 GB) | `4c849cb5ce538db2bbe61f161022d2a545488ff41ea9d904e894d7b095d41cc7` | ❌ 无法提供 |
 
-- `recovery.img`：会尝试作为 Release 附件单独提供。
-- `super.img`：超过 Release 上限，需自行从原厂固件包获取，或用 `payload_dumper` / `lpunpack` 处理后再分包。
-- 校验方式：`certutil -hashfile IMG\super.img SHA256`，与 `CHECKSUMS.sha256` 中的值比对。
+- **`recovery.img`**：Android boot image v2，kernel 段与 `boot.img` 完全一致（4.14.186+），ramdisk 32,585,298 字节（gzip）。因超过 GitHub 单文件 100 MB 限制，改由 Release 附件分发。
+- **`super.img`**：动态分区镜像（system / vendor / odm / product），超过 Release 附件 2 GB 上限，GitHub 无法承载；请从原厂固件包获取，或用 `lpunpack` 自行处理。
+- 校验方式：`certutil -hashfile IMG\recovery.img SHA256`，与上表或 `CHECKSUMS.sha256` 比对。
 
 ---
 
