@@ -1,0 +1,11 @@
+* -text
+*.exe binary
+*.dll binary
+*.img binary
+*.bin binary
+*.sig binary
+*.auth binary
+*.fw binary
+*.lib binary
+*.a binary
+*.so binary
